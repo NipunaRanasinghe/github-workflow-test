@@ -65,7 +65,7 @@ release {
 
     git {
         requireBranch = 'next-release'
-        pushToRemote = 'upstream'
+        pushToRemote = 'origin'
         commitVersionFileOnly = false
         signTag = false
     }
