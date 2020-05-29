@@ -1,0 +1,72 @@
+plugins {
+    id "org.jetbrains.intellij" version "0.4.9"
+    id "com.github.hierynomus.license" version "0.15.0"
+    id "com.github.gradle-git-version-calculator" version "1.1.0"
+    id 'net.researchgate.release' version '2.6.0'
+    id "com.gradle.plugin-publish" version "0.10.1"
+    id 'signing'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = "org.wso2.lsp4intellij"
+version = gitVersionCalculator.calculateVersion("v")
+
+intellij {
+    version '2020.1'
+    type 'IC'
+    updateSinceUntilBuild false
+}
+
+dependencies {
+    compile group: 'org.eclipse.lsp4j', name: 'org.eclipse.lsp4j', version: '0.8.1'
+    compile group: 'com.vladsch.flexmark', name: 'flexmark', version: '0.34.58'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.6.5'
+    testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.6.5'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+}
+
+license {
+    header = rootProject.file("resources/license/HEADER.txt")
+    ext["year"] = Calendar.getInstance().get(Calendar.YEAR)
+    ext["author"] = "WSO2 Inc. (http://www.wso2.org)"
+    strictCheck = true
+    skipExistingHeaders = true
+    mapping("java", "SLASHSTAR_STYLE")
+    exclude("/**/*.png")
+}
+
+release {
+    failOnCommitNeeded = true
+    failOnPublishNeeded = true
+    failOnSnapshotDependencies = true
+    failOnUnversionedFiles = true
+    failOnUpdateNeeded = true
+    revertOnFail = true
+    preCommitText = ''
+    preTagCommitMessage = '[Gradle Release Plugin] - pre tag commit: '
+    tagCommitMessage = '[Gradle Release Plugin] - creating tag: '
+    newVersionCommitMessage = '[Gradle Release Plugin] - new version commit: '
+    tagTemplate = '${version}'
+    versionPropertyFile = 'gradle.properties'
+    buildTasks = ['jar']
+
+    git {
+        requireBranch = 'next-release'
+        pushToRemote = 'upstream'
+        commitVersionFileOnly = false
+        signTag = false
+    }
+}
