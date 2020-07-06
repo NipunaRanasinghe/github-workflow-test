@@ -66,9 +66,9 @@ sonarqube {
     properties {
         property("sonar.sourceEncoding", "UTF-8")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.organization", "NipunaRanasinghe")
-        property("sonar.projectKey", "NipunaRanasinghe_github_workflow_test")
-        property("sonar.projectName", "Github-Workflow-Test")
+        property("sonar.organization", "nipunaranasinghe")
+        property("sonar.projectKey", "NipunaRanasinghe_github-workflow-test")
+        property("sonar.projectName", "github-workflow-test")
         property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacoco.xml")
     }
 }
