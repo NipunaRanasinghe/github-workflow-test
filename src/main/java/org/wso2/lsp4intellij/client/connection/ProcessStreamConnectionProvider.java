@@ -19,10 +19,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -69,6 +66,11 @@ public class ProcessStreamConnectionProvider implements StreamConnectionProvider
     }
 
     private ProcessBuilder createProcessBuilder() {
+        try {
+            InputStream inputStream = new FileInputStream("");
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
         if (builder != null) {
             return builder;
         } else {
