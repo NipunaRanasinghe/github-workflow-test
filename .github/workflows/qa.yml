@@ -7,6 +7,10 @@ on:
       - master
       - sonarcloud-test
   pull_request:
+    branches:
+      - develop
+      - master
+      - sonarcloud-test
 
 jobs:
   QA:
