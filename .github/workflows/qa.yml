@@ -5,6 +5,7 @@ on:
     branches:
       - develop
       - master
+      - sonarcloud-test
   pull_request:
 
 jobs:
